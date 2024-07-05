@@ -1,6 +1,7 @@
 package com.example.tictactoe;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -12,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
     int flag = 0; // 0 for X, 1 for O
     int count = 0;
     String lastPlayer = ""; // Track the last player
+    Handler handler = new Handler(); // Handler to handle the delay
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,10 +95,10 @@ public class MainActivity extends AppCompatActivity {
                         (b3.equals(b5) && b5.equals(b7) && !b3.equals(""))) {
 
                     Toast.makeText(this, "Winner is: " + lastPlayer, Toast.LENGTH_SHORT).show();
-                    newGame();
+                    handler.postDelayed(this::newGame, 3000); // Delay before starting a new game
                 } else if (count == 9) {
                     Toast.makeText(this, "Game is Drawn", Toast.LENGTH_SHORT).show();
-                    newGame();
+                    handler.postDelayed(this::newGame, 3000); // Delay before starting a new game
                 }
             }
         }
